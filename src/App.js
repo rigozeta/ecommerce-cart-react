@@ -1,10 +1,11 @@
-import logo from './logo.svg';
 import './styles/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {Navbar, Badge, Container, Row, Col} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+
+import Products from './components/Products';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
 				<Row>
 					<Col>
 						Product list here
+						<Products />
 					</Col>
 				</Row>
 			</Container>
