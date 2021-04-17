@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
 		<header>
-			<Navbar bg="dark" variant="dark">
+			<Navbar bg="dark" variant="dark" fixed="top">
 				<Navbar.Brand>eStore</Navbar.Brand>
 				<Navbar.Toggle />
 				<Navbar.Collapse className="justify-content-end">
@@ -25,7 +25,7 @@ function App() {
 			</Navbar>
 		</header>
 
-		<div className="mb-2 mt-2">
+		<div className="mb-2 mt-2 pt-4">
 			<Container>
 				<Row>
 					<Col>
