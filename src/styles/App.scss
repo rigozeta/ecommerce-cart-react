@@ -1,0 +1,33 @@
+html {
+	background-color: #222;
+
+	.App {
+		background-color:#444;
+		color: #f9f9f9;
+		header {
+			.badge {
+				margin-left: -5px;
+			    margin-top: -5px;
+			    position: absolute;
+
+				&.badge-danger {
+					background-color: rgba(220, 53, 69, 0.7);
+				}
+			}
+		}
+
+		footer {
+			background-color: #222;
+			color:#cacaca;
+		}
+
+		.mb-2 {
+			margin-bottom:2em;
+		}
+
+		.mt-2 {
+			margin-top:2em;
+		}
+	}
+
+}
