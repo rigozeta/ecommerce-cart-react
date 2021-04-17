@@ -26,7 +26,6 @@ function App() {
 			<Container>
 				<Row>
 					<Col>
-						Product list here
 						<Products />
 					</Col>
 				</Row>
@@ -35,7 +34,14 @@ function App() {
 		</div>
 
 		<footer>
-			<p className="text-center">&copy; 2021 jrcgonzalez.com</p>
+			<Container>
+				<Row>
+					<Col className="text-center mt-2">
+						<p >Prototype by: <a href="https://jrcgonzalez.com">jrcgonzalez</a></p>
+						<p><a href="https://github.com/rigozeta/ecommerce-cart-react" target="_blank">GitHub Repository</a></p>
+					</Col>
+				</Row>
+			</Container>
 		</footer>
 
     </div>
