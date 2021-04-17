@@ -1,3 +1,5 @@
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+
 import './styles/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -6,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 import Products from './components/Products';
+import ProductDetail from './components/ProductDetail';
 
 function App() {
   return (
@@ -26,7 +29,14 @@ function App() {
 			<Container>
 				<Row>
 					<Col>
-						<Products />
+					<Router>
+						<Route path="/" exact render={()=>(
+							<Products />
+						)} />
+
+						<Route path='/:id' component={ProductDetail} />
+					</Router>
+
 					</Col>
 				</Row>
 			</Container>
