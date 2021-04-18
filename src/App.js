@@ -29,6 +29,12 @@ function App() {
 
 	}, [])
 
+	const subcribeCartUpdates = () => {
+		cartLib.getCart().then(function(response){
+			setCartQuantity(response.total_quantity)
+		})
+	}
+
 	return (
 		<div className="App">
 			<header>
@@ -52,7 +58,9 @@ function App() {
 								<Products />
 							)} />
 
-							<Route path='/:id' component={ProductDetail} />
+							<Route path='/:id' render={(props)=>(
+								<ProductDetail watcherFn={subcribeCartUpdates}/>
+							)} />
 						</Router>
 
 						</Col>

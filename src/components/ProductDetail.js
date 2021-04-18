@@ -14,7 +14,7 @@ import { faTag, faChevronLeft, faMinus, faPlus, faCartPlus} from '@fortawesome/f
 import {default as Cart} from 'cart-lib';
 
 
-function ProductDetail() {
+function ProductDetail({watcherFn}) {
 	const cartLib = new Cart("mycart");
 
 	const [product, setProduct] = useState([]);
@@ -72,13 +72,16 @@ function ProductDetail() {
 		let addProduct = product;
 		addProduct.quantity = inputQuantity;
 
+
+
 		cartLib.addToCart(addProduct).then(function(response){
 			izitoast.success({
 				title: 'OK',
 				message: 'Product added to cart.'
 			});
 
-			cartLib.getCart();
+			watcherFn();
+			
 		}).catch(function(err){
 			console.log("error adding cart", err)
 			izitoast.error({
