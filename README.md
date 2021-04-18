@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# reactjs implementation of cart-lib
+This is a sample implementation of [cart-lib](https://github.com/rigozeta/cart-lib) using reactjs. Featuring product listing, add to cart, remove from cart, update cart contents.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Demo
+https://createur.jrcgonzalez.com/
 
-## Available Scripts
+# External Service
+I've used [MockAPI](https://mockapi.io/) to provide a simple json server for live use.
+For local development, you may use [json-server](https://www.npmjs.com/package/json-server) to mock your rest api (already added in package.json)
 
-In the project directory, you can run:
+# Setup
+```npm install```
 
-### `npm start`
+# Components
+- App (Main app)
+- Products (List of sample products)
+- ProductDetails (Single product info where you can add to cart. Added Min of 1 and max of 100 per part addition for validation purposes)
+- CartDetails (You cart page that displays all items added to your cart. You may also directly update your cart's content such as add, deduct quantity of your items, and also remove them totally from your cart)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Scripts
+```npm start```
+Run react app in browser (local)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```npm run db```
+Run instance of json-server for local mocking of api
 
-### `npm test`
+```npm run dev```
+Run both react app and json-server at the same time.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```npm run build```
+Default react build script for production
 
-### `npm run build`
+# Using json-server
+If you want to add/remove more products to the product list, you may do so, by updating the contents of `db.json`.
+Then update your API calls in the components such that the urls will be: `http://localhost:4001/products`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Reference
+[GitHub](https://github.com/rigozeta/ecommerce-cart-react): https://github.com/rigozeta/ecommerce-cart-react
