@@ -59,7 +59,7 @@ function Products() {
 									</Card.Text>
 								</Card.Body>
 								<Card.Footer className="text-center">
-									<Link to={product.id}><Button variant="info"><FontAwesomeIcon icon={faSearch} /> View More</Button></Link>
+									<Link to={`product/${product.id}`}><Button variant="info"><FontAwesomeIcon icon={faSearch} /> View More</Button></Link>
 								</Card.Footer>
 							</Card>
 						</Col>

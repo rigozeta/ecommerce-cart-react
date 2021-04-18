@@ -12,6 +12,7 @@ import {default as Cart} from 'cart-lib';
 
 import Products from './components/Products';
 import ProductDetail from './components/ProductDetail';
+import CartDetails from './components/CartDetails';
 
 function App() {
 	const cartLib = new Cart("mycart");
@@ -36,6 +37,7 @@ function App() {
 	}
 
 	return (
+		<Router>
 		<div className="App">
 			<header>
 				<Navbar bg="dark" variant="dark" fixed="top">
@@ -43,7 +45,7 @@ function App() {
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end">
 						<Navbar.Text>
-							<FontAwesomeIcon icon={faShoppingCart} /> <Badge variant="danger">{cartQuantity}</Badge>
+							<Link to='/cart'><FontAwesomeIcon icon={faShoppingCart} /> <Badge variant="danger">{cartQuantity}</Badge></Link>
 						</Navbar.Text>
 					</Navbar.Collapse>
 				</Navbar>
@@ -53,15 +55,19 @@ function App() {
 				<Container>
 					<Row>
 						<Col>
-						<Router>
+
 							<Route path="/" exact render={()=>(
 								<Products />
 							)} />
 
-							<Route path='/:id' render={(props)=>(
+							<Route path='/product/:id' render={(props)=>(
 								<ProductDetail watcherFn={subcribeCartUpdates}/>
 							)} />
-						</Router>
+
+							<Route path='/cart' render={(props)=>(
+								<CartDetails watcherFn={subcribeCartUpdates}/>
+							)} />
+
 
 						</Col>
 					</Row>
@@ -81,6 +87,7 @@ function App() {
 			</footer>
 
 		</div>
+		</Router>
 	);
 }
 
