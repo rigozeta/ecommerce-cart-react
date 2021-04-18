@@ -11,9 +11,11 @@ import {Card, Container, Row, Col, Button, Alert, Form} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTag, faChevronLeft, faMinus, faPlus, faCartPlus} from '@fortawesome/free-solid-svg-icons'
 
+import {default as Cart} from 'cart-lib';
+
 
 function ProductDetail() {
-
+	const cartLib = new Cart("mycart");
 
 	const [product, setProduct] = useState([]);
 	const [productLoaded, setProductLoaded] = useState(false);
@@ -67,10 +69,22 @@ function ProductDetail() {
 	}
 
 	const addToCart = () => {
-		console.log("add to cart function");
-		izitoast.success({
-			title: 'OK',
-			message: 'Product added to cart.'
+		let addProduct = product;
+		addProduct.quantity = inputQuantity;
+
+		cartLib.addToCart(addProduct).then(function(response){
+			izitoast.success({
+				title: 'OK',
+				message: 'Product added to cart.'
+			});
+
+			cartLib.getCart();
+		}).catch(function(err){
+			console.log("error adding cart", err)
+			izitoast.error({
+				title: 'Error',
+				message: 'Could not add product.'
+			});
 		});
 	}
 
