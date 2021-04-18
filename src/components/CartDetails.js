@@ -3,13 +3,14 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import axios from 'axios';
 import izitoast from 'izitoast';
 import 'izitoast/dist/css/iziToast.css';
+import Swal from 'sweetalert2'
 
 import '../styles/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {Card, Row, Col, Button, Alert, Media, Form} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart, faTag, faSearch, faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart, faTag, faSearch, faTrash, faMinus, faPlus, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 import {default as Cart} from 'cart-lib';
 
@@ -18,16 +19,18 @@ function CartDetails({watcherFn}) {
 	const [cartItems, setCartItems] = useState([]);
 
 	useEffect(()=>{
-		const getCart = () => {
-			cartLib.getCart().then(function(response){
-				console.log("get Cart", response)
-				setCartItems(response.rows)
-			})
-		}
+
 
 		getCart();
 
 	}, [])
+
+	const getCart = () => {
+		cartLib.getCart().then(function(response){
+			console.log("get Cart", response)
+			setCartItems(response.rows)
+		})
+	}
 
 	const updateQuantity = (evt, item) => {
 		console.log(evt, item);
@@ -81,6 +84,7 @@ function CartDetails({watcherFn}) {
 				});
 
 				watcherFn();
+				getCart();
 			}).catch(function(err){
 				console.log("error updating cart", err)
 				izitoast.error({
@@ -92,10 +96,44 @@ function CartDetails({watcherFn}) {
 
 	}
 
+	const removeItem = (item) => {
+
+		Swal.fire({
+			title: `Remove '${item.title}' from your cart?`,
+			showCancelButton: true,
+			confirmButtonText: `Remove`,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				cartLib.removeProduct(item).then(function(response){
+					izitoast.success({
+						title: 'OK',
+						message: 'Product removed from cart.'
+					});
+					watcherFn();
+					getCart();
+				}).catch(function(err){
+					console.log("error removing product", err)
+					izitoast.error({
+						title: 'Error',
+						message: 'Could not remove product.'
+					});
+				});
+			}
+		});
+
+
+	}
 
   return (
     <div className="Products">
 		<h3>My Cart</h3>
+		{cartItems.length > 0 && (
+			<Row className="mb-2">
+				<Col>
+					<Button variant="dark"><Link to='/'><FontAwesomeIcon icon={faChevronLeft} /> Back</Link></Button>
+				</Col>
+			</Row>
+		)}
 		<Row>
 			<Col md="12" lg="12" className="cart">
 			{cartItems.map((item, id)=>{
@@ -126,13 +164,22 @@ function CartDetails({watcherFn}) {
 									</Form.Row>
 								</Form>
 								<p className="text-right mt-2">
-									<Button variant="danger" size="sm"><FontAwesomeIcon icon={faTrash} /> Remove</Button>
+									<Button variant="danger" size="sm" onClick={()=>{removeItem(item)}}><FontAwesomeIcon icon={faTrash} /> Remove</Button>
 								</p>
 							</Media.Body>
 						</Media>
 			})}
 			</Col>
 		</Row>
+
+		{cartItems.length < 1 && (
+			<Row className="mb-2 mt-2">
+				<Col className="text-center">
+					There are no products in your cart yet.
+					<Button variant="info" className="mb-2 mt-2"><Link to="/">Add Products</Link></Button>
+				</Col>
+			</Row>
+		)}
     </div>
   );
 }

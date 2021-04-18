@@ -41,7 +41,7 @@ function App() {
 		<div className="App">
 			<header>
 				<Navbar bg="dark" variant="dark" fixed="top">
-					<Navbar.Brand>eStore</Navbar.Brand>
+					<Navbar.Brand><Link to="/">eStore</Link></Navbar.Brand>
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end">
 						<Navbar.Text>
