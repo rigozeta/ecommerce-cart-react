@@ -20,7 +20,8 @@ function Products() {
 
 			axios({
 				method: 'get',
-				url: "http://localhost:4001/products",
+				url: "https://607be75767e6530017573630.mockapi.io/products",
+				// url: "http://localhost:4001/products",
 			}).then((response)=>{
 				console.log("get products", response);
 				setProducts(response.data);

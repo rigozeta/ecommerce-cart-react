@@ -26,7 +26,8 @@ function ProductDetail() {
 		const getProduct = () => {
 			axios({
 				method: 'get',
-				url: "http://localhost:4001/products?id=" + location.id,
+				// url: "http://localhost:4001/products?id=" + location.id,
+				url: "https://607be75767e6530017573630.mockapi.io/products?id=" + location.id,
 			}).then((response)=>{
 				console.log("get product", response);
 				setProductLoaded(true);
