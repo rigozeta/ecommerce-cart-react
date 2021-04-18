@@ -17,18 +17,17 @@ import {default as Cart} from 'cart-lib';
 function CartDetails({watcherFn}) {
 	const cartLib = new Cart("mycart");
 	const [cartItems, setCartItems] = useState([]);
+	const [cartTotal, setCartTotal] = useState(0);
 
 	useEffect(()=>{
-
-
 		getCart();
-
 	}, [])
 
 	const getCart = () => {
 		cartLib.getCart().then(function(response){
 			console.log("get Cart", response)
-			setCartItems(response.rows)
+			setCartItems(response.rows);
+			setCartTotal(response.total_value.toFixed(2));
 		})
 	}
 
@@ -62,6 +61,7 @@ function CartDetails({watcherFn}) {
 				});
 
 				watcherFn();
+				getCart();
 			}).catch(function(err){
 				console.log("error updating cart", err)
 				izitoast.error({
@@ -134,6 +134,7 @@ function CartDetails({watcherFn}) {
 				</Col>
 			</Row>
 		)}
+		{cartItems.length > 0 && (
 		<Row>
 			<Col md="12" lg="12" className="cart">
 			{cartItems.map((item, id)=>{
@@ -171,6 +172,12 @@ function CartDetails({watcherFn}) {
 			})}
 			</Col>
 		</Row>
+		)}
+		{cartItems.length > 0 && (
+		<Row>
+			<Col className="text-right"><Alert variant="dark">Total Cart Price: <strong>${cartTotal}</strong></Alert></Col>
+		</Row>
+		)}
 
 		{cartItems.length < 1 && (
 			<Row className="mb-2 mt-2">
